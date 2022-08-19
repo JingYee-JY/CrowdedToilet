@@ -1,0 +1,151 @@
+body {
+    flex-direction: column;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: fixed;
+    overflow: hidden;
+    font-size: 7.5vmin;
+  }
+
+  button{
+    background-color: rgba(255, 255, 255,0);
+    border: 0px;
+}
+.start,
+.selection,
+.final{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    place-items: center;
+    background-color: #C58F9D;
+    gap: 15vh;
+    width: 100%;
+    height: 100%;
+}
+.final{
+    gap: 5vh;
+}
+.game{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    place-items: center;
+    gap: 15vh;
+    height: 100%;
+    width: 400px;
+}
+.preview{
+    position: relative;
+    display: grid;
+    width: 43vh;
+    height: 30vh;
+    gap: 3vh;
+    grid-template-columns: repeat(2, 20vh);
+}
+.title{
+    width: 40vh;
+}
+.pre-sign{
+    width: 20vh;
+}
+.btn{
+    width: 20vh; 
+}
+.hide{
+    display: none;
+    visibility: hidden;
+}
+.selection{
+    gap: 5vh;
+}
+.background
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./img/Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.selectImag{
+    width: 50vh;
+}
+.icon{
+    width: 7vh;
+}
+.topRight{
+    position: absolute;
+    display: flex;
+    top: 1vh;
+    right: 1vh;
+}
+.topMiddle{
+    position: absolute;
+    display: flex;
+    font-size: 6vh;
+    top: 1vh;
+}
+.questionNumber{
+    font-family: "Lilita One";
+}
+.Leftsigns,
+.Rightsigns{
+    position: absolute;
+    display: grid;
+    height: 30vh;
+    width: 20vmin;
+    gap: 3vh;
+    grid-template-rows: repeat(2, 25vmin);
+}
+.Rightsigns{
+    right: 1vh;
+}
+.Leftsigns{
+    left: 1vh;
+}
+.Fesign,
+.Masign{
+    width: 20vmin;
+}
+.arrow{
+    width: 20vmin;
+}
+.person{
+    margin-left: -8vh;
+    position: absolute;
+    width: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+.c{
+    width: 25vh;
+}
+.speech{
+    position: absolute;
+    top: 3vh;
+    height: 50vh;
+    width: 60vmin;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.text{
+width: 35vh;
+}
+.img{
+    width: 40vh;
+}
