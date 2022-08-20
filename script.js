@@ -9,6 +9,7 @@ const person =  document.querySelector(".person")
 const questionNumber = document.querySelector(".questionNumber");
 const speech = document.querySelector(".speech");
 const final = document.querySelector(".final");
+const next = document.querySelector(".next");
 var startingX, startingY, movingX, movingY;
 let startGame = false
 let current = 0;
@@ -16,12 +17,11 @@ let swipe
 let left
 let right
 let score
-let once
 let leftGender = 1
 let rightGender = 2
 let totalQuestion = 0;
 let characterGender;
-let move = {step: 0.5}
+let move = {step: 3}
 
 //girl = 1
 //boy = 2
@@ -77,6 +77,12 @@ easy.addEventListener("click", () => {
     Question()
     moveCharacter()
 })
+next.addEventListener("click", () => {
+    next.classList.add("hide")
+    person.style.left = person.x + "vmin"
+    speech.style.backgroundImage = "none"
+    Question()
+})
 
 function Question(){
     let pass = totalQuestion /2;
@@ -99,7 +105,7 @@ function Question(){
                 selection.classList.remove("hide")
             })
         }
-        else if(score > pass){
+        else if(score >= pass){
             console.log("P")
             final.innerHTML = `
             <img class="title" src="./img/title.png">
@@ -138,8 +144,9 @@ function Question(){
     characterGender = character[randomcharacterIndex].gender
     person.innerHTML=`
     <img class="c" src="${character[randomcharacterIndex].image}">`
-    person.x = 50;
-    person.style.left = person.x + "%"
+    let border = game.getBoundingClientRect();
+    person.x = (border.width / 2) - 25
+    person.style.left = person.x + "px"
     swipe = false
     left = false
     right = false
@@ -152,65 +159,46 @@ function moveCharacter(){
 }
 function moving(){
     if(startGame){
+        let border = game.getBoundingClientRect();
         console.log(person.x)
         if(left == true){
             movingY = null;
             movingX = null;
             person.x = person.x - move.step
-            person.style.left = person.x + "vmin"
+            person.style.left = person.x + "px"
             if(person.x < 0){
                 if(characterGender == leftGender){
                     score = score + 1
                     console.log("r")
                     left = false
-                    once = false
                     speech.style.backgroundImage = "url('./img/ThankYou.png')"
                 }
                 else{
                     console.log("w")
                     left = false
-                    once = false
                     speech.style.backgroundImage = "url('./img/wrong2.png')"
                 }
+                next.classList.remove("hide")
             }
-            let delay = setTimeout(() => {
-                if(once == false){
-                    person.x = 50
-                    person.style.left = person.x + "vmin"
-                    speech.style.backgroundImage = "none"
-                    Question()
-                    once = true
-                }
-              }, 2500);
         }
         if(right == true){
             movingY = null;
             movingX = null;
             person.x = person.x + move.step
-            person.style.left = person.x + "vmin"
-            if(person.x > 100){
+            person.style.left = person.x + "px"
+            if(person.x > (border.width - 50)){
                 if(characterGender == rightGender){
                     score = score + 1
                     console.log("r")
                     right = false
-                    once = false
                     speech.style.backgroundImage = "url('./img/ThankYou2.png')"
                 }
                 else{
                     console.log("w")
                     right = false
-                    once = false
                     speech.style.backgroundImage = "url('./img/wrong1.png')"
                 }
-                let delay = setTimeout(() => {
-                    if(once == false){
-                        person.x = 50
-                        person.style.left = person.x + "vmin"
-                        speech.style.backgroundImage = "none"
-                        Question()
-                        once = true
-                    }
-                  }, 2500);
+                next.classList.remove("hide")
             }
         }
         window.requestAnimationFrame(moving);
