@@ -1,20 +1,14 @@
 body {
-    flex-direction: column;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100%;
     width: 100%;
     margin: 0;
     position: fixed;
     overflow: hidden;
-    font-size: 7.5vmin;
-  }
-
-  button{
-    background-color: rgba(255, 255, 255,0);
-    border: 0px;
+    background-image: url("./img/texture.png");
+    background-size: cover;
+}
+*{
+    font-family: 'Lilita One', cursive;
 }
 .start,
 .selection,
@@ -25,7 +19,7 @@ body {
     justify-content: center;
     flex-direction: column;
     place-items: center;
-    background-color: #C58F9D;
+    background-color: #E4FFFD;
     gap: 15vh;
     width: 100%;
     height: 100%;
@@ -45,25 +39,55 @@ body {
     width: 100%;;
     background-image: url("./img/Background.png");
     background-size: cover;
+    background-position: top;
     background-repeat: no-repeat;
 }
+
 .preview{
-    position: relative;
-    display: grid;
-    width: 43vh;
-    height: 30vh;
-    gap: 3vh;
-    grid-template-columns: repeat(2, 20vh);
+    width: 100%;
 }
 .title{
-    width: 40vh;
+    width: 40%;
 }
-.pre-sign{
-    width: 20vh;
+
+.startButton, .playAgain{
+    width: 100%;
+    position: relative;
+    align-self: center;
+    background-color: #77A8AC;
+    box-shadow: 0px 8px #144C78;
+    border: 0px;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5% 5%;
+    margin-bottom: 10%;
+    color: white;
+    font-size: 25px;
 }
-.btn{
-    width: 20vh; 
+
+.startButton p, .startGame p {
+    margin: 3%;
+    margin-right: 6%;
 }
+
+.words{
+    font-size: 20px;
+    width: 100%;
+    margin: 0 !important;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-weight: 600;
+}
+
+.arrowHead{
+    margin-right: 10px;
+    max-width: 15px;
+    height: auto;
+}
+
 .hide{
     display: none;
     visibility: hidden;
@@ -115,7 +139,7 @@ body {
     width: 20vmin;
 }
 .person{
-    margin-bottom: -10vmin;
+    margin-bottom: -200px;
     position: absolute;
     width: 15vmin;
     display: flex;
@@ -128,23 +152,35 @@ body {
 }
 .speech{
     position: absolute;
-    top: 3vh;
-    height: 50vh;
-    width: 60vmin;
+    padding: 5% 2%;
+    background-color: white;
+    font-size: 30px;
+    border-radius: 15px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.speech p{
+    margin: 0px;
+}
+
 .text{
 width: 35vh;
 }
 .img{
     width: 40vh;
 }
-.next{
-    position: absolute;
-    bottom: 4vh;
+
+  /*mobile*/
+  @media screen and (max-width: 767px){
+    .startButton, .playAgain {
+    width: calc(100% - 70px);
+    justify-content: center;
+    align-items: center;
+    }
 }
+
 /*ipad*/
 @media screen and (min-width:768px) and (max-width:1023px) {
     .c{

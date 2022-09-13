@@ -1,9 +1,5 @@
 const startButton = document.querySelector(".startButton")
 const start = document.querySelector(".start")
-const selection = document.querySelector(".selection")
-const easy = document.querySelector(".easy")
-const normal = document.querySelector(".normal")
-const hard = document.querySelector(".hard")
 const game =  document.querySelector(".game")
 const person =  document.querySelector(".person")
 const questionNumber = document.querySelector(".questionNumber");
@@ -29,7 +25,9 @@ const character = [
     {gender:"1", image:"./img/Female 1.png"},
     {gender:"2", image:"./img/Male 1.png"},
     {gender:"1", image:"./img/Female 2.png"},
-    {gender:"2", image:"./img/Male 2.png"}]
+    {gender:"2", image:"./img/Male 2.png"},
+    {gender:"1", image:"./img/Female 3.png"},
+    {gender:"2", image:"./img/Male 3.png"}]
 
   function touchstart(evt) {
     startingX = evt.touches[0].clientX
@@ -65,23 +63,13 @@ function control(){
 
 startButton.addEventListener("click", () => {
     start.classList.add("hide")
-    selection.classList.remove("hide")
-})
-easy.addEventListener("click", () => {
-    selection.classList.add("hide")
     game.classList.remove("hide")
-    totalQuestion = 10
+    totalQuestion = Math.floor(Math.random() * 15) + 1
     startGame = true
     score = 0
     current = 0
     Question()
     moveCharacter()
-})
-next.addEventListener("click", () => {
-    next.classList.add("hide")
-    person.style.left = person.x + "vmin"
-    speech.style.backgroundImage = "none"
-    Question()
 })
 
 function Question(){
@@ -95,9 +83,9 @@ function Question(){
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/Super helperImage.png">
-            <img class="text" src="./img/Super helper.png">
+            <p>Super Helper Goob Job!</p>
             <button class="playAgain">
-                <img class="btn" src="./img/playAgain.png">
+            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
             let playAgainBtn =  document.querySelector(".playAgain");
             playAgainBtn.addEventListener("click", () => {
@@ -110,9 +98,9 @@ function Question(){
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/thankYouImage.png">
-            <img class="text" src="./img/ThankyouText.png">
+            <p>Thank You!</p>
             <button class="playAgain">
-                <img class="btn" src="./img/playAgain.png">
+            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
             let playAgainBtn =  document.querySelector(".playAgain");
             playAgainBtn.addEventListener("click", () => {
@@ -125,9 +113,9 @@ function Question(){
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/attention.png">
-            <img class="text" src="./img/Please pay attention.png">
+            <p>Please pay attention</p>
             <button class="playAgain">
-                <img class="btn" src="./img/playAgain.png">
+            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
             let playAgainBtn =  document.querySelector(".playAgain");
             playAgainBtn.addEventListener("click", () => {
@@ -139,7 +127,7 @@ function Question(){
     }
     current += 1;
     questionNumber.innerHTML = current + " / " + totalQuestion;
-    let randomcharacterIndex = Math.floor(Math.random() * 4);
+    let randomcharacterIndex = Math.floor(Math.random() * character.length);
     console.log(randomcharacterIndex)
     characterGender = character[randomcharacterIndex].gender
     person.innerHTML=`
@@ -169,16 +157,27 @@ function moving(){
             if(person.x < 0){
                 if(characterGender == leftGender){
                     score = score + 1
+                    speech.classList.remove("hide")
                     console.log("r")
                     left = false
-                    speech.style.backgroundImage = "url('./img/ThankYou.png')"
+                    speech.style.color = "#DFB0B6"
+                    speech.style.border = "5px solid #DFB0B6"
+                    speech.style.top = (border.height /4 - 75) +"px"
+                    speech.innerHTML= "<p>Thank You!</p>"
                 }
                 else{
                     console.log("w")
                     left = false
-                    speech.style.backgroundImage = "url('./img/wrong2.png')"
+                    speech.classList.remove("hide")
+                    speech.style.color = "red"
+                    speech.style.border = "5px solid red"
+                    speech.style.top = (border.height /4 - 75) +"px"
+                    speech.innerHTML= "<p>Ah! Wrong Toliet!</p>"
                 }
-                next.classList.remove("hide")
+                let delay = setTimeout(() => {
+                    speech.classList.add("hide")
+                    Question()
+                  }, 1000);
             }
         }
         if(right == true){
@@ -189,16 +188,27 @@ function moving(){
             if(person.x > (border.width - 50)){
                 if(characterGender == rightGender){
                     score = score + 1
+                    speech.classList.remove("hide")
                     console.log("r")
                     right = false
-                    speech.style.backgroundImage = "url('./img/ThankYou2.png')"
+                    speech.style.color = "#77A8AC"
+                    speech.style.border = "5px solid #77A8AC"
+                    speech.style.top = (border.height /4 - 75) +"px"
+                    speech.innerHTML= "<p>Thank You!</p>"
                 }
                 else{
                     console.log("w")
                     right = false
-                    speech.style.backgroundImage = "url('./img/wrong1.png')"
+                    speech.classList.remove("hide")
+                    speech.style.color = "red"
+                    speech.style.border = "5px solid red"
+                    speech.style.top = (border.height /4 - 75) +"px"
+                    speech.innerHTML= "<p>Ugh! Wrong Toliet!</p>"
                 }
-                next.classList.remove("hide")
+                let delay = setTimeout(() => {
+                    speech.classList.add("hide")
+                    Question()
+                  }, 1000);
             }
         }
         window.requestAnimationFrame(moving);
