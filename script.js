@@ -37,9 +37,36 @@ const character = [
     movingX = evt.touches[0].clientX
     movingY = evt.touches[0].clientY
   } 
-  function handleInput() {
-    control();
+
+Input()
+
+function Input() {
+    window.addEventListener("keydown", handleInput, {once: true})
 }
+
+async function handleInput(e){
+    if(startGame == true & swipe == false){
+        switch(e.key){
+        case "ArrowLeft":
+            left = true
+            swipe = true;    
+        break
+        case "ArrowRight":
+            right = true
+            swipe = true;
+        break
+        default:
+            Input()
+        return
+        }
+        Input()
+    }
+    else{
+        console.log("d")
+        Input()
+    }
+}
+
 function control(){
     if(startGame == true & swipe == false){
         console.log(startingX)
@@ -63,6 +90,10 @@ function control(){
 
 startButton.addEventListener("click", () => {
     start.classList.add("hide")
+    began()
+})
+
+function began(){
     game.classList.remove("hide")
     totalQuestion = Math.floor(Math.random() * 15) + 1
     startGame = true
@@ -70,7 +101,7 @@ startButton.addEventListener("click", () => {
     current = 0
     Question()
     moveCharacter()
-})
+}
 
 function Question(){
     let pass = totalQuestion /2;
@@ -83,46 +114,36 @@ function Question(){
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/Super helperImage.png">
-            <p>Super Helper Goob Job!</p>
+            <p>You did an excellent job!</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
-            let playAgainBtn =  document.querySelector(".playAgain");
-            playAgainBtn.addEventListener("click", () => {
-                final.classList.add("hide")
-                selection.classList.remove("hide")
-            })
         }
         else if(score >= pass){
             console.log("P")
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/thankYouImage.png">
-            <p>Thank You!</p>
+            <p>You are a helpful person!</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
-            let playAgainBtn =  document.querySelector(".playAgain");
-            playAgainBtn.addEventListener("click", () => {
-                final.classList.add("hide")
-                selection.classList.remove("hide")
-            })
         }
         else if(score < pass){
             console.log("f")
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/attention.png">
-            <p>Please pay attention</p>
+            <p>Take your time to decide.</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>`
-            let playAgainBtn =  document.querySelector(".playAgain");
-            playAgainBtn.addEventListener("click", () => {
-                final.classList.add("hide")
-                selection.classList.remove("hide")
-            })
         }
+        let playAgainBtn =  document.querySelector(".playAgain");
+        playAgainBtn.addEventListener("click", () => {
+            final.classList.add("hide")
+            began()
+        })
         return
     }
     current += 1;
