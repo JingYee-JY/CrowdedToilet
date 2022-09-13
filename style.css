@@ -63,8 +63,6 @@ body {
     border-radius: 10px;
     padding: 5% 5%;
     margin-bottom: 10%;
-    color: white;
-    font-size: 25px;
 }
 
 .startButton p, .startGame p {
@@ -73,8 +71,9 @@ body {
 }
 
 .words{
-    font-size: 20px;
+    font-size: 20px !important;
     width: 100%;
+    color: white !important;
     margin: 0 !important;
     justify-content: center;
     align-items: center;
@@ -166,14 +165,21 @@ body {
 }
 
 .text{
-width: 35vh;
+    width: 35vh;
 }
+
 .img{
-    width: 40vh;
+    width: 60%;
+}
+
+.final p{
+    font-size: 30px;
+    color: #77A8AC;
+    margin: 10px auto;
 }
 
   /*mobile*/
-  @media screen and (max-width: 767px){
+@media screen and (max-width: 767px){
     .startButton, .playAgain {
     width: calc(100% - 70px);
     justify-content: center;
