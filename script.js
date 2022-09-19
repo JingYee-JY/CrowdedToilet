@@ -193,7 +193,7 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Ah! Wrong Toliet!</p>"
+                    speech.innerHTML= "<p>Ugh! Wrong Toliet!</p>"
                 }
                 let delay = setTimeout(() => {
                     speech.classList.add("hide")
@@ -224,7 +224,7 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Ugh! Wrong Toliet!</p>"
+                    speech.innerHTML= "<p>Ah! Wrong Toliet!</p>"
                 }
                 let delay = setTimeout(() => {
                     speech.classList.add("hide")

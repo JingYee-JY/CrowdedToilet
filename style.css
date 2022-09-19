@@ -110,6 +110,12 @@ body {
     display: flex;
     font-size: 6vh;
     top: 1vh;
+    align-items: center;
+    flex-direction: column;
+}
+.input{
+    font-size: 20px;
+    color: #144C78;
 }
 .questionNumber{
     font-family: "Lilita One";
@@ -212,6 +218,9 @@ body {
     }
     .img{
         width: 50%;
+    }
+    .input{
+        font-size: 40px;
     }
 }
 
