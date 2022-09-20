@@ -127,6 +127,9 @@ function Question(){
             <p>You are a helpful person!</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
+            </button>
+            <button class="home">
+            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
         else if(score < pass){
@@ -137,12 +140,20 @@ function Question(){
             <p>Take your time to decide.</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
+            </button>
+            <button class="home">
+            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
         let playAgainBtn =  document.querySelector(".playAgain");
         playAgainBtn.addEventListener("click", () => {
             final.classList.add("hide")
             began()
+        })
+        let home =  document.querySelector(".home");
+        home.addEventListener("click", () => {
+            final.classList.add("hide")
+            start.classList.remove("hide")
         })
         return
     }

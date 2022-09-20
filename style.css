@@ -24,7 +24,7 @@ body {
     height: 100%;
 }
 .final{
-    gap: 5vh;
+    gap: 2vh;
 }
 .game{
     position: absolute;
@@ -49,7 +49,7 @@ body {
     width: 40%;
 }
 
-.startButton, .playAgain{
+.startButton, .playAgain, .home{
     width: 100%;
     position: relative;
     align-self: center;
@@ -61,10 +61,15 @@ body {
     text-decoration: none;
     border-radius: 10px;
     padding: 5% 5%;
-    margin-bottom: 10%;
+    margin-bottom: 20px;
 }
 
-.startButton p, .startGame p {
+.home{
+    background-color: #144C78;
+    box-shadow: 0px 8px #77A8AC;
+}
+
+.startButton p, .startGame p, .home p {
     margin: 3%;
     margin-right: 6%;
 }
@@ -77,7 +82,7 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .arrowHead{
@@ -206,7 +211,7 @@ body {
     .c{
         margin-right: 70px;
     }
-    .startButton, .playAgain {
+    .startButton, .playAgain, .home {
         max-width: 300px;
         padding: 2.5%;
     }
@@ -231,9 +236,18 @@ body {
         justify-content: center;
       width: 100%;
     }
+    .start{
+        gap: 8vh;
+    }
     .start, .howToPlay, .game,.final{
         max-width: 400px;
         margin: 0 auto;
+    }
+    .startButton,.playAgain,.home{
+        max-width: 250px;
+    }
+    .speech{
+        margin-top: 10px;
     }
     .game{
         background-image: url(./img/BackgroundIpad.png);
