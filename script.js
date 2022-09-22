@@ -112,12 +112,16 @@ function Question(){
         if(score == totalQuestion){
             console.log("A")
             final.innerHTML = `
-            <img class="title" src="./img/title.png">
+            <img class="title endTitle" src="./img/title.png">
             <img class="img" src="./img/Super helperImage.png">
             <p>You did an excellent job!</p>
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
-            </button>`
+            </button>
+            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
+            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
+            </button>
+            `
         }
         else if(score >= pass){
             console.log("P")
@@ -128,7 +132,7 @@ function Question(){
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>
-            <button class="home">
+            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
@@ -141,17 +145,12 @@ function Question(){
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>
-            <button class="home">
+            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
         let playAgainBtn =  document.querySelector(".playAgain");
         playAgainBtn.addEventListener("click", () => {
-            final.classList.add("hide")
-            began()
-        })
-        let home =  document.querySelector(".home");
-        home.addEventListener("click", () => {
             final.classList.add("hide")
             start.classList.remove("hide")
         })
@@ -195,7 +194,7 @@ function moving(){
                     speech.style.color = "#DFB0B6"
                     speech.style.border = "5px solid #DFB0B6"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Thank You!</p>"
+                    speech.innerHTML= "<p>Thank you!</p>"
                 }
                 else{
                     console.log("w")
@@ -204,7 +203,7 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Ugh! Wrong Toliet!</p>"
+                    speech.innerHTML= "<p>Ugh! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
                     speech.classList.add("hide")
@@ -226,7 +225,7 @@ function moving(){
                     speech.style.color = "#77A8AC"
                     speech.style.border = "5px solid #77A8AC"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Thank You!</p>"
+                    speech.innerHTML= "<p>Thank you!</p>"
                 }
                 else{
                     console.log("w")
@@ -235,7 +234,7 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
-                    speech.innerHTML= "<p>Ah! Wrong Toliet!</p>"
+                    speech.innerHTML= "<p>Ah! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
                     speech.classList.add("hide")
