@@ -6,6 +6,14 @@ const questionNumber = document.querySelector(".questionNumber");
 const speech = document.querySelector(".speech");
 const final = document.querySelector(".final");
 const next = document.querySelector(".next");
+
+const clickSound = document.getElementById("click")
+const clap = document.getElementById("clap")
+const completed = document.getElementById("completed")
+const lose = document.getElementById("lose")
+const correct = document.getElementById("correct")
+const wrong = document.getElementById("wrong")
+
 var startingX, startingY, movingX, movingY;
 let startGame = false
 let current = 0;
@@ -17,7 +25,7 @@ let leftGender = 1
 let rightGender = 2
 let totalQuestion = 0;
 let characterGender;
-let move = {step: 3}
+let move = 3
 
 //girl = 1
 //boy = 2
@@ -89,8 +97,11 @@ function control(){
 }
 
 startButton.addEventListener("click", () => {
-    start.classList.add("hide")
-    began()
+    playClickSound()
+    let delay = setTimeout(() => {
+        start.classList.add("hide")
+        began()
+    }, 200);
 })
 
 function began(){
@@ -110,7 +121,8 @@ function Question(){
         final.classList.remove("hide")
         game.classList.add("hide")
         if(score == totalQuestion){
-            console.log("A")
+            clap.currentTime = 0
+            clap.play()
             final.innerHTML = `
             <img class="title endTitle" src="./img/title.png">
             <img class="img" src="./img/Super helperImage.png">
@@ -118,13 +130,14 @@ function Question(){
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>
-            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
+            <button class="home">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>
             `
         }
         else if(score >= pass){
-            console.log("P")
+            completed.currentTime = 0
+            completed.play()
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/thankYouImage.png">
@@ -132,12 +145,13 @@ function Question(){
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>
-            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
+            <button class="home">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
         else if(score < pass){
-            console.log("f")
+            lose.currentTime = 0
+            lose.play()
             final.innerHTML = `
             <img class="title" src="./img/title.png">
             <img class="img" src="./img/attention.png">
@@ -145,14 +159,24 @@ function Question(){
             <button class="playAgain">
             <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
             </button>
-            <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
+            <button class="home">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
             </button>`
         }
         let playAgainBtn =  document.querySelector(".playAgain");
         playAgainBtn.addEventListener("click", () => {
-            final.classList.add("hide")
-            start.classList.remove("hide")
+            playClickSound()
+                let delay = setTimeout(() => {
+                    final.classList.add("hide")
+                    start.classList.remove("hide")
+                }, 200);
+        })
+        let homeButton =  document.querySelector(".home");
+        homeButton.addEventListener("click", () => {
+            playClickSound()
+            let delay = setTimeout(() => {
+              location.assign('https://gimme.sg/activations/dementia/');
+            }, 200);
         })
         return
     }
@@ -179,17 +203,25 @@ function moveCharacter(){
 function moving(){
     if(startGame){
         let border = game.getBoundingClientRect();
+
+        if(border.width < 500){
+            move = 3
+        }
+        if(border.width > 500){
+            move = 6
+        }
         console.log(person.x)
         if(left == true){
             movingY = null;
             movingX = null;
-            person.x = person.x - move.step
+            person.x = person.x - move
             person.style.left = person.x + "px"
             if(person.x < 0){
                 if(characterGender == leftGender){
                     score = score + 1
                     speech.classList.remove("hide")
-                    console.log("r")
+                    correct.currentTime = 0
+                    correct.play()
                     left = false
                     speech.style.color = "#DFB0B6"
                     speech.style.border = "5px solid #DFB0B6"
@@ -197,7 +229,8 @@ function moving(){
                     speech.innerHTML= "<p>Thank you!</p>"
                 }
                 else{
-                    console.log("w")
+                    wrong.currentTime = 0
+                    wrong.play()
                     left = false
                     speech.classList.remove("hide")
                     speech.style.color = "red"
@@ -214,10 +247,12 @@ function moving(){
         if(right == true){
             movingY = null;
             movingX = null;
-            person.x = person.x + move.step
+            person.x = person.x + move
             person.style.left = person.x + "px"
             if(person.x > (border.width - 50)){
                 if(characterGender == rightGender){
+                    correct.currentTime = 0
+                    correct.play()
                     score = score + 1
                     speech.classList.remove("hide")
                     console.log("r")
@@ -227,8 +262,9 @@ function moving(){
                     speech.style.top = (border.height /4 - 75) +"px"
                     speech.innerHTML= "<p>Thank you!</p>"
                 }
-                else{
-                    console.log("w")
+                if(characterGender != rightGender){
+                    wrong.currentTime = 0
+                    wrong.play()
                     right = false
                     speech.classList.remove("hide")
                     speech.style.color = "red"
@@ -245,3 +281,14 @@ function moving(){
         window.requestAnimationFrame(moving);
     }
 }
+
+function playClickSound(){
+    console.log(clickSound)
+    clickSound.currentTime = 0
+    clickSound.play()
+}
+
+/*prevent double tag zoom*/
+document.addEventListener('dblclick', function(event) {
+event.preventDefault();
+}, { passive: false });
