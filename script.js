@@ -197,8 +197,35 @@ function moving(){
                     speech.innerHTML= "<p>Ugh! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
+                    console.log("test")
                     speech.classList.add("hide")
-                    Question()
+                    if(current == totalQuestion){
+                        let pass = totalQuestion /2;
+                        final.classList.remove("hide")
+                        game.classList.add("hide")
+                        if(score == totalQuestion){
+                                clap.currentTime = 0
+                                clap.play()
+                                img.src="./img/Super helperImage.png"
+                                encourage.innerHTML = "You did an excellent job!"
+                            }
+                            else if(score >= pass){
+                                completed.currentTime = 0
+                                completed.play()
+                                img.src="./img/thankYouImage.png"
+                                encourage.innerHTML = "You are a helpful person!"
+                            }
+                            else if(score < pass){
+                                lose.currentTime = 0
+                                lose.play()
+                                img.src="./img/attention.png"
+                                encourage.innerHTML = "Take your time to decide."
+                            }
+                            return
+                        }
+                    if(current != totalQuestion){
+                        Question()
+                    }
                   }, 1000);
             }
         }
@@ -237,6 +264,7 @@ function moving(){
                     speech.innerHTML= "<p>Ah! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
+                    console.log("test")
                     speech.classList.add("hide")
                     if(current == totalQuestion){
                         let pass = totalQuestion /2;
