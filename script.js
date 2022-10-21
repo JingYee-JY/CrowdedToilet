@@ -6,6 +6,10 @@ const questionNumber = document.querySelector(".questionNumber");
 const speech = document.querySelector(".speech");
 const final = document.querySelector(".final");
 const next = document.querySelector(".next");
+const encourage = document.querySelector(".encourage")
+const img = document.querySelector(".img")
+const playAgain = document.querySelector(".playAgain")
+const home = document.querySelector(".home")
 
 const clickSound = document.getElementById("click")
 const clap = document.getElementById("clap")
@@ -26,7 +30,6 @@ let rightGender = 2
 let totalQuestion = 0;
 let characterGender;
 let move = 3
-
 //girl = 1
 //boy = 2
 const character = [
@@ -104,6 +107,20 @@ startButton.addEventListener("click", () => {
     }, 200);
 })
 
+playAgain.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+        final.classList.add("hide")
+        start.classList.remove("hide")
+    }, 200);
+})
+home.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+        location.assign('https://gimme.sg/activations/dementia/');
+    }, 200);
+})
+
 function began(){
     game.classList.remove("hide")
     totalQuestion = Math.floor(Math.random() * 15) + 1
@@ -115,71 +132,6 @@ function began(){
 }
 
 function Question(){
-    let pass = totalQuestion /2;
-    if(current == totalQuestion){
-        console.log(score)
-        final.classList.remove("hide")
-        game.classList.add("hide")
-        if(score == totalQuestion){
-            clap.currentTime = 0
-            clap.play()
-            final.innerHTML = `
-            <img class="title endTitle" src="./img/title.png">
-            <img class="img" src="./img/Super helperImage.png">
-            <p>You did an excellent job!</p>
-            <button class="playAgain">
-            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
-            </button>
-            <button class="home">
-            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
-            </button>
-            `
-        }
-        else if(score >= pass){
-            completed.currentTime = 0
-            completed.play()
-            final.innerHTML = `
-            <img class="title" src="./img/title.png">
-            <img class="img" src="./img/thankYouImage.png">
-            <p>You are a helpful person!</p>
-            <button class="playAgain">
-            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
-            </button>
-            <button class="home">
-            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
-            </button>`
-        }
-        else if(score < pass){
-            lose.currentTime = 0
-            lose.play()
-            final.innerHTML = `
-            <img class="title" src="./img/title.png">
-            <img class="img" src="./img/attention.png">
-            <p>Take your time to decide.</p>
-            <button class="playAgain">
-            <p class="words"><img src="./img/restart.png" class="arrowHead">Play again</p>
-            </button>
-            <button class="home">
-            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
-            </button>`
-        }
-        let playAgainBtn =  document.querySelector(".playAgain");
-        playAgainBtn.addEventListener("click", () => {
-            playClickSound()
-                let delay = setTimeout(() => {
-                    final.classList.add("hide")
-                    start.classList.remove("hide")
-                }, 200);
-        })
-        let homeButton =  document.querySelector(".home");
-        homeButton.addEventListener("click", () => {
-            playClickSound()
-            let delay = setTimeout(() => {
-              location.assign('https://gimme.sg/activations/dementia/');
-            }, 200);
-        })
-        return
-    }
     current += 1;
     questionNumber.innerHTML = current + " / " + totalQuestion;
     let randomcharacterIndex = Math.floor(Math.random() * character.length);
@@ -226,6 +178,9 @@ function moving(){
                     speech.style.color = "#DFB0B6"
                     speech.style.border = "5px solid #DFB0B6"
                     speech.style.top = (border.height /4 - 75) +"px"
+                    if(border.width < 400){
+                        speech.style.top = (border.height /4 - 50) +"px"
+                    }
                     speech.innerHTML= "<p>Thank you!</p>"
                 }
                 else{
@@ -236,6 +191,9 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
+                    if(border.width < 400){
+                        speech.style.top = (border.height /4 - 50) +"px"
+                    }
                     speech.innerHTML= "<p>Ugh! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
@@ -260,6 +218,9 @@ function moving(){
                     speech.style.color = "#77A8AC"
                     speech.style.border = "5px solid #77A8AC"
                     speech.style.top = (border.height /4 - 75) +"px"
+                    if(border.width < 400){
+                        speech.style.top = (border.height /4 - 50) +"px"
+                    }
                     speech.innerHTML= "<p>Thank you!</p>"
                 }
                 if(characterGender != rightGender){
@@ -270,11 +231,40 @@ function moving(){
                     speech.style.color = "red"
                     speech.style.border = "5px solid red"
                     speech.style.top = (border.height /4 - 75) +"px"
+                    if(border.width < 400){
+                        speech.style.top = (border.height /4 - 50) +"px"
+                    }
                     speech.innerHTML= "<p>Ah! Wrong toliet!</p>"
                 }
                 let delay = setTimeout(() => {
                     speech.classList.add("hide")
-                    Question()
+                    if(current == totalQuestion){
+                        let pass = totalQuestion /2;
+                        final.classList.remove("hide")
+                        game.classList.add("hide")
+                        if(score == totalQuestion){
+                                clap.currentTime = 0
+                                clap.play()
+                                img.src="./img/Super helperImage.png"
+                                encourage.innerHTML = "You did an excellent job!"
+                            }
+                            else if(score >= pass){
+                                completed.currentTime = 0
+                                completed.play()
+                                img.src="./img/thankYouImage.png"
+                                encourage.innerHTML = "You are a helpful person!"
+                            }
+                            else if(score < pass){
+                                lose.currentTime = 0
+                                lose.play()
+                                img.src="./img/attention.png"
+                                encourage.innerHTML = "Take your time to decide."
+                            }
+                            return
+                        }
+                    if(current != totalQuestion){
+                        Question()
+                    }
                   }, 1000);
             }
         }
